@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { Store } from '@ngrx/store';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import * as TodoListActions from './todo-list.actions';
 import * as SnackBarActions from './snack-bar.actions';
@@ -143,5 +142,5 @@ export class TodoListEffects {
   });
 
 
-  constructor(private actions$: Actions, private service: TodoListService, private store: Store) { }
+  constructor(private actions$: Actions, private service: TodoListService) { }
 }
