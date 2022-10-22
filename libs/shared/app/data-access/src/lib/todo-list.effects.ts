@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
-import { catchError, exhaustMap, tap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 import * as TodoListActions from './todo-list.actions';
 import * as SnackBarActions from './snack-bar.actions';
 import { TodoListService } from './todo-list.service';
@@ -63,7 +63,7 @@ export class TodoListEffects {
       ofType(TodoListActions.createTodoListError),
       map(() =>
         SnackBarActions.openSnackBar({
-          message: "Houve uma falha ao criar um novo todo.",
+          message: "Houve uma falha ao criar o novo todo.",
           action: "Erro"
         })
       ),
@@ -99,7 +99,7 @@ export class TodoListEffects {
       ofType(TodoListActions.removeTodoListError),
       map(() =>
         SnackBarActions.openSnackBar({
-          message: "Houve uma falha ao remover um todo.",
+          message: "Houve uma falha ao remover o todo.",
           action: "Erro"
         })
       ),

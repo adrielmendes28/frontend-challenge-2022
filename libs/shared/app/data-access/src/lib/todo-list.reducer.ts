@@ -58,5 +58,5 @@ export const reducer = createReducer(
   on(TodoListActions.updateTodoListError, (state) => ({
     ...state,
     isLoading: false
-  })),
+  }))
 );
