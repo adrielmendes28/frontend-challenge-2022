@@ -1,3 +1,5 @@
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
 import { TestBed, async } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -8,7 +10,11 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       providers: [provideMockStore({})],
       declarations: [AppComponent],
-      imports: [HttpClientModule],
+      imports: [
+        HttpClientModule,
+        MatListModule,
+        MatFormFieldModule,
+      ],
     }).compileComponents();
   }));
 
