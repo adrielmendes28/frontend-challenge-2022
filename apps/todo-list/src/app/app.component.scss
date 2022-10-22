@@ -30,3 +30,24 @@
   margin: 16px auto;
   flex: 0 0 auto;
 }
+
+.loading-in-button {
+  display:flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loading-in-button ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #fff;
+}
+
+.loading-tasks {
+  display: flex;
+  flex:1;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  margin-bottom:20px;
+}
