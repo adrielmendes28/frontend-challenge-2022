@@ -72,6 +72,7 @@
       mat-flat-button
       color="primary"
       class="add-button"
+      [disabled]="isLoading$ | async"
     >
       <ng-container *ngIf="(isLoading$ | async) === false">
         <mat-icon>add_task</mat-icon>
