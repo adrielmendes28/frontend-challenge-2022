@@ -1,3 +1,4 @@
+import { SnackbarEffects } from './snack-bar.effects';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
@@ -14,7 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
       fromTodoList.todoListFeatureKey,
       fromTodoList.reducer
     ),
-    EffectsModule.forFeature([TodoListEffects]),
+    EffectsModule.forFeature([TodoListEffects, SnackbarEffects]),
   ],
 })
 export class SharedAppDataAccessModule {}
