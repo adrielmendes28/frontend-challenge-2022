@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { catchError, exhaustMap, tap, map } from 'rxjs/operators';
 import * as TodoListActions from './todo-list.actions';
+import * as SnackBarActions from './snack-bar.actions';
 import { TodoListService } from './todo-list.service';
 import { of } from 'rxjs';
 
@@ -20,6 +22,18 @@ export class TodoListEffects {
     );
   });
 
+  loadTodoListError$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.loadTodoListError),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Houve uma falha ao carregar a lista de todos.",
+          action: "Erro"
+        })
+      ),
+    )
+  });
+
   createTodoList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TodoListActions.createTodoList),
@@ -32,7 +46,31 @@ export class TodoListEffects {
     );
   });
 
-  removerTodoList$ = createEffect(() => {
+  createTodoListSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.createTodoListSuccess),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Todo cadastrado com sucesso!",
+          action: "Sucesso"
+        })
+      ),
+    )
+  });
+
+  createTodoListError$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.createTodoListError),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Houve uma falha ao criar um novo todo.",
+          action: "Erro"
+        })
+      ),
+    )
+  });
+
+  removeTodoList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TodoListActions.removeTodoList),
       exhaustMap(({ taskId }) =>
@@ -42,6 +80,30 @@ export class TodoListEffects {
         )
       )
     );
+  });
+
+  removeTodoListSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.removeTodoListSuccess),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Todo removido com sucesso!",
+          action: "Sucesso"
+        })
+      ),
+    )
+  });
+
+  removeTodoListError$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.removeTodoListError),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Houve uma falha ao remover um todo.",
+          action: "Erro"
+        })
+      ),
+    )
   });
 
   updateTodoList$ = createEffect(() => {
@@ -56,5 +118,30 @@ export class TodoListEffects {
     );
   });
 
-  constructor(private actions$: Actions, private service: TodoListService) {}
+  updateTodoListSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.updateTodoListSuccess),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Lista de todos atualizada com sucesso!",
+          action: "Sucesso"
+        })
+      ),
+    )
+  });
+
+  updateTodoListError$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListActions.updateTodoListError),
+      map(() =>
+        SnackBarActions.openSnackBar({
+          message: "Houve uma falha ao atualizar um todo na lista de todos.",
+          action: "Erro"
+        })
+      ),
+    )
+  });
+
+
+  constructor(private actions$: Actions, private service: TodoListService, private store: Store) { }
 }
