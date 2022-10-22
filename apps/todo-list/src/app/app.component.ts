@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
@@ -23,8 +23,9 @@ export class AppComponent implements OnInit {
     TodoListSelectors.doingTaskList
   );
   done$: Observable<Task[]> = this.store.select(TodoListSelectors.doneTaskList);
+  isLoading$: Observable<boolean> = this.store.select(TodoListSelectors.isLoading);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) { }
 
   ngOnInit() {
     this.store.dispatch(TodoListActions.loadTodoList());
