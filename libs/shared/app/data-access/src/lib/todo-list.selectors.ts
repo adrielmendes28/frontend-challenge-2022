@@ -6,6 +6,11 @@ export const selectTodoListState = createFeatureSelector<fromTodoList.State>(
   fromTodoList.todoListFeatureKey
 );
 
+export const isLoading = createSelector(
+  selectTodoListState,
+  ({ isLoading }) => isLoading
+);
+
 export const taskList = createSelector(
   selectTodoListState,
   ({ taskList }) => taskList
